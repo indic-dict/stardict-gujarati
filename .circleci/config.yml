@@ -21,7 +21,9 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: sudo apt-get install stardict-tools
+          command: |
+            sudo apt-get update -y
+            sudo apt-get install -y stardict-tools
       - run:
           name: Set up dict tools
           command: git clone https://github.com/indic-dict/dict-tools.git ~/dict-tools/ --depth 1
