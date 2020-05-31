@@ -2,7 +2,7 @@ box: debian
 build:
   steps:
     - install-packages:
-        packages: git ssh-client stardict-tools
+        packages: git ssh-client openjdk stardict-tools
     - add-ssh-key:
         keyname: github_key
         host: github.com
