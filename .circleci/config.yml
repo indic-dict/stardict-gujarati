@@ -22,11 +22,15 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            sudo add-apt-repository universe
             sudo apt-get update -y
             sudo apt-get install -y stardict-tools
       - run:
           name: Set up dict tools
           command: git clone https://github.com/indic-dict/dict-tools.git ~/dict-tools/ --depth 1
+      - run:
+          name: Build dicts
+          command: make full
       - run:
           name: Deploy to gh-pages-circle branch
           command: gh-pages
