@@ -1,7 +1,7 @@
 box: ubuntu
 build:
   steps:
-    - chikei-development/install-packages:
+    - vvasuki/install-universe-packages:
         packages: git ssh-client openjdk stardict-tools
     - add-ssh-key:
         keyname: github_key
