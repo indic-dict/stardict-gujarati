@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt install -y software-properties-common
+            sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu bionic main universe restricted multiverse"
+            sudo apt-get update -y
+            sudo apt-get install -y stardict-tools
+      - run:
+          name: Set up dict tools
+          command: git clone https://github.com/indic-dict/dict-tools.git ~/dict-tools/ --depth 1
+      - run:
+          name: Build dicts
+          command: make full
+      - run:
+          name: Deploy to gh-pages-circle branch
+          command: gh-pages_circle
