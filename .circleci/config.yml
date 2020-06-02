@@ -34,4 +34,4 @@ jobs:
           command: make full
       - run:
           name: Deploy to gh-pages-circle branch
-          command: gh-pages
+          command: gh-pages_circle
